@@ -58,7 +58,11 @@ const writerOpts = {
     const typeSpecIndex = typeSpecs.findIndex(({ type: t }) => type === t);
     if (typeSpecIndex === -1) return;
     const typeSpec = typeSpecs[typeSpecIndex];
-    commit.type = `${typeSpec.type} ${typeSpec.string}`;
+    if (typeSpec.type.length <= 2) {
+      commit.type = `${typeSpec.type} ${typeSpec.string}`;
+    } else {
+      commit.type = typeSpec.string;
+    }
 
     // Sort by index
     commit.typeSpecIndex = typeSpecIndex;
